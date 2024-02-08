@@ -1,0 +1,24 @@
+.bg-black {
+    background-color: #000 !important;
+}
+
+.mediaTable .mediaTableTypeFrame {
+    width: 100px;
+    height: 50px;
+    border: 1px solid #888;
+    background-color: #444;
+    color: #777;
+    font-size: 26px;
+}
+
+.mediaTable td {
+    cursor: pointer;
+}
+
+.mediaTable .mediaWasPlayed:hover i {
+    color: var(--bs-danger) !important;
+}
+
+.mediaTable tr:has(td:hover) .mediaTableTypeFrame {
+    color: #0b5ed7;
+}

@@ -1,0 +1,8 @@
+.w-0 { width:  0 !important; }
+.h-0 { height: 0 !important; }
+
+/* hide video controls */
+#video::-webkit-media-controls,
+#video::-webkit-media-controls-enclosure {
+    display: none !important;
+}

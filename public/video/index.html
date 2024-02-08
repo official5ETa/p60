@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>p60 Video Frame</title>
+    <script src="/lib/jquery/@3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/lib/bootstrap/@5.0.2/bootstrap.min.css">
+    <script src="/lib/socket.io/@4.1.3/socket.io.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body class="bg-dark">
+
+    <div class="container p-3">
+      <div class="alert alert-danger" id="errorAlert" style="display:none;"></div>
+      <div class="alert alert-success" id="successAlert" style="display:none;"></div>
+      <div id="controls" style="display:none;">
+        <button class="btn btn-secondary" onclick="video.requestFullscreen()">fullscreen</button>
+      </div>
+    </div>
+
+    <div class="w-0 h-0">
+      <video id="video" preload="auto"></video>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

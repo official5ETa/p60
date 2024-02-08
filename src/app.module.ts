@@ -4,6 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
 import { readdirSync } from 'fs';
+import { VideoSocketGateway } from './video-socket/video-socket.gateway';
+import { MediaController } from './api/media/media.controller';
+import { MediaService } from './api/media/media.service';
 
 @Module({
   imports: [
@@ -14,7 +17,7 @@ import { readdirSync } from 'fs';
       }),
     ),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, MediaController],
+  providers: [AppService, VideoSocketGateway, MediaService],
 })
 export class AppModule {}
