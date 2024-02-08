@@ -11,7 +11,13 @@ export class MediaService {
       .map((file) => ({
         src: encodeURI(join('/resource/queue', file)),
         name: file,
-        mimetype: lookup(file),
+        type: lookup(file).startsWith('video')
+          ? 'video'
+          : lookup(file).startsWith('audio')
+            ? 'audio'
+            : file.endsWith('teleprompt.txt')
+              ? 'teleprompt'
+              : 'unknown',
       }));
   }
 }

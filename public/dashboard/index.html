@@ -36,7 +36,7 @@
                   <td>
                     <div class="form-check text-nowrap" role="button">
                       <input class="form-check-input" type="checkbox" value="" id="videoPreviewControlsEnabled" role="button">
-                      <label class="form-check-label" for="videoPreviewControlsEnabled" role="button">disable controls</label>
+                      <label class="form-check-label" for="videoPreviewControlsEnabled" role="button">Controls deaktivieren</label>
                     </div>
                   </td>
                 </tr>
@@ -80,6 +80,20 @@
           <hr class="bg-light">
 
           <h3 class="text-light">Medien</h3>
+          <div class="d-flex flex-nowrap gap-4 pt-1 pb-2 text-light user-select-none">
+            <div class="form-check text-nowrap" role="button">
+              <input class="form-check-input" type="checkbox" value="" id="mediaTableFilterHideMedia" role="button">
+              <label class="form-check-label" for="mediaTableFilterHideMedia" role="button">Medien verbergen</label>
+            </div>
+            <div class="form-check text-nowrap" role="button">
+              <input class="form-check-input" type="checkbox" value="" id="mediaTableFilterHideTeleprompt" role="button">
+              <label class="form-check-label" for="mediaTableFilterHideTeleprompt" role="button">Teleprompter Datein verbergen</label>
+            </div>
+            <div class="form-check text-nowrap" role="button">
+              <input class="form-check-input" type="checkbox" value="" id="mediaTableFilterHideUnknown" role="button" checked>
+              <label class="form-check-label" for="mediaTableFilterHideUnknown" role="button">Unbekannte verbergen</label>
+            </div>
+          </div>
           <div class="overflow-auto">
             <table class="mediaTable table table-hover">
               <tbody id="mediaTable"></tbody>

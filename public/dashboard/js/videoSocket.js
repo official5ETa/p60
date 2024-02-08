@@ -5,6 +5,9 @@ const _videoPreviewPlayButtonPaused = $('#videoPreviewPlayButtonPaused');
 const _videoPreviewPlayButtonPlaying = $('#videoPreviewPlayButtonPlaying');
 const _videoPreviewSeekbar = $('#videoPreviewSeekbar');
 const _videoPreviewControlsEnabled = $('#videoPreviewControlsEnabled');
+const _mediaTableFilterHideMedia = $('#mediaTableFilterHideMedia');
+const _mediaTableFilterHideTeleprompt = $('#mediaTableFilterHideTeleprompt');
+const _mediaTableFilterHideUnknown = $('#mediaTableFilterHideUnknown');
 
 /** @type {HTMLVideoElement} */
 const videoPreview = document.getElementById('videoPreview');
@@ -56,19 +59,6 @@ function connectToVideoSocket() {
   });
 }
 
-_videoPreviewControlsEnabled.change(() => {
-  const disabled = _videoPreviewControlsEnabled.is(':checked');
-  _videoPreviewPlayButtonPaused.prop('disabled', disabled);
-  _videoPreviewPlayButtonPlaying.prop('disabled', disabled);
-  _videoPreviewSeekbar.prop('disabled', disabled);
-});
-
-_videoPreviewSeekbar.on('input', () => {
-  videoSocketSendSeekPerc(
-    _videoPreviewSeekbar.val() / +_videoPreviewSeekbar.attr('max'),
-  );
-});
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function videoSocketSendPlay(src) {
   videoSocket.emit('play', { src });
@@ -88,6 +78,31 @@ function videoSocketSendStop() {
 function videoSocketSendSeekPerc(seekPerc) {
   videoSocket.emit('seekPerc', { value: seekPerc });
 }
+
+_videoPreviewControlsEnabled.change(() => {
+  const disabled = _videoPreviewControlsEnabled.is(':checked');
+  _videoPreviewPlayButtonPaused.prop('disabled', disabled);
+  _videoPreviewPlayButtonPlaying.prop('disabled', disabled);
+  _videoPreviewSeekbar.prop('disabled', disabled);
+});
+
+_videoPreviewSeekbar.on('input', () => {
+  videoSocketSendSeekPerc(
+    _videoPreviewSeekbar.val() / +_videoPreviewSeekbar.attr('max'),
+  );
+});
+
+_mediaTableFilterHideMedia.change(() => {
+  setMediaTableDOMWithFilter();
+});
+
+_mediaTableFilterHideTeleprompt.change(() => {
+  setMediaTableDOMWithFilter();
+});
+
+_mediaTableFilterHideUnknown.change(() => {
+  setMediaTableDOMWithFilter();
+});
 
 connectToVideoSocket();
 resetVideoDisconnectedTimeout();
