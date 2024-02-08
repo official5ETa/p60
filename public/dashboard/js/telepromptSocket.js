@@ -39,6 +39,7 @@ function telepromptSocketSendText(text) {
 }
 
 connectToTelepromptSocket();
+resetTelepromptDisconnectedTimeout();
 
 setInterval(() => {
   _telepromptSocketReadyState.html(
