@@ -12,10 +12,13 @@ const _mediaTableFilterHideUnknown = $('#mediaTableFilterHideUnknown');
 /** @type {HTMLVideoElement} */
 const videoPreview = document.getElementById('videoPreview');
 
-let videoDisconnectedTimeout;
+let videoDisconnectedTimeout,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  videoConnected = false;
 function resetVideoDisconnectedTimeout() {
   clearTimeout(videoDisconnectedTimeout);
   videoDisconnectedTimeout = setTimeout(() => {
+    videoConnected = false;
     _videoPreviewConnectedStatus.html('<span class="text-danger">NO</span>');
   }, 4e3);
 }
@@ -35,6 +38,7 @@ function connectToVideoSocket() {
 
   videoSocket.on('status', (data) => {
     resetVideoDisconnectedTimeout();
+    videoConnected = true;
 
     if (videoPreview.src !== data.src) videoPreview.src = data.src;
     videoPreview.currentTime = data.currentTime;
@@ -56,6 +60,8 @@ function connectToVideoSocket() {
     );
 
     _videoPreviewConnectedStatus.html('<span class="text-success">YES</span>');
+
+    setVideoPreviewControlsEnabled();
   });
 }
 
@@ -79,11 +85,16 @@ function videoSocketSendSeekPerc(seekPerc) {
   videoSocket.emit('seekPerc', { value: seekPerc });
 }
 
-_videoPreviewControlsEnabled.change(() => {
-  const disabled = _videoPreviewControlsEnabled.is(':checked');
+function setVideoPreviewControlsEnabled() {
+  const disabled =
+    _videoPreviewControlsEnabled.is(':checked') || !videoConnected;
   _videoPreviewPlayButtonPaused.prop('disabled', disabled);
   _videoPreviewPlayButtonPlaying.prop('disabled', disabled);
   _videoPreviewSeekbar.prop('disabled', disabled);
+}
+
+_videoPreviewControlsEnabled.change(() => {
+  setVideoPreviewControlsEnabled();
 });
 
 _videoPreviewSeekbar.on('input', () => {
@@ -106,6 +117,7 @@ _mediaTableFilterHideUnknown.change(() => {
 
 connectToVideoSocket();
 resetVideoDisconnectedTimeout();
+setVideoPreviewControlsEnabled();
 
 setInterval(() => {
   _videoSocketReadyState.html(

@@ -20,5 +20,5 @@
 }
 
 .mediaTable tr:has(td:hover) .mediaTableTypeFrame {
-    color: #0b5ed7;
+    color: var(--bs-primary);
 }

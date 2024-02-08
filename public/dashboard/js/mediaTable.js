@@ -1,5 +1,5 @@
 let mediaTable = [];
-function updateMediaTable() {
+function fetchMediaTable() {
   $.ajax({
     type: 'GET',
     url: '/api/media',
@@ -19,8 +19,8 @@ function setMediaTableDOM(media = mediaTable) {
   $('#mediaTable').html(
     media.map(
       (media, index) => `
-        <tr id="mediaTableMedia-${index}">
-          <td class="align-middle" onclick="mediaTableMediaClick(${index})">
+        <tr id="mediaTableMedia-${index}" class="user-select-none">
+            <td class="align-middle" onclick="mediaTableMediaClick(${index})">
             <div class="mediaTableTypeFrame d-flex justify-content-center align-items-center pe-none">
               ${media.type === 'video' ? '<i class="fa fa-video"></i>' : ''}
               ${media.type === 'audio' ? '<i class="fa fa-volume-off"></i>' : ''}
@@ -29,7 +29,7 @@ function setMediaTableDOM(media = mediaTable) {
           </td>
           <td class="align-middle w-100" onclick="mediaTableMediaClick(${index})">
             <div class="d-flex align-items-center text-light pe-none">
-              ${media.name}
+              ${media.name.replace(/(\.mp4|\.mp3|\.teleprompt\.txt)$/, '')}
             </div>
           </td>
           <td class="align-middle mediaWasPlayed text-end" onclick="removeFromMediaWasPlayed(${index})"></td>
@@ -77,8 +77,13 @@ function removeFromMediaWasPlayed(index) {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function mediaTableMediaClick(index) {
   const media = mediaTable[index];
-  videoSocketSendPlay(media.src);
-  addToMediaWasPlayed(index);
+  if (media.type === 'teleprompt') {
+    loadTeleprompt(media);
+    addToMediaWasPlayed(index);
+  } else if (videoConnected) {
+    videoSocketSendPlay(media.src);
+    addToMediaWasPlayed(index);
+  }
 }
 
-updateMediaTable();
+fetchMediaTable();

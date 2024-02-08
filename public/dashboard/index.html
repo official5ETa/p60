@@ -20,9 +20,9 @@
 
         <div class="col-7 border border-1 rounded-3 border-light mx-2 pb-3">
           <h3 class="text-light fw-light user-select-none mt-3">Audio & Video</h3>
-          <hr class="bg-light">
+          <hr class="bg-light mb-0">
 
-          <div class="row">
+          <div class="row mt-4 mb-3">
             <div class="col-4">
               <video id="videoPreview" muted class="w-100 bg-black"></video>
             </div>
@@ -43,7 +43,7 @@
                 <tr>
                   <td class="pe-3 text-nowrap">Video-Preview Connected:</td>
                   <td class="w-100" id="videoPreviewConnectedStatus" colspan="2">
-                    <span class="text-secondary">UNKNOWN</span>
+                    <span class="text-secondary">NO</span>
                   </td>
                 </tr>
                 <tr>
@@ -55,10 +55,10 @@
                 <tr>
                   <td colspan="3" class="pt-2">
                     <div class="d-flex flex-nowrap align-items-center gap-3">
-                      <button id="videoPreviewPlayButtonPaused" class="btn btn-secondary" type="button" onclick="videoSocketSendPlay()">
+                      <button id="videoPreviewPlayButtonPaused" class="btn btn-primary" type="button" onclick="videoSocketSendPlay()">
                         <i class="fas fa-play"></i>
                       </button>
-                      <button id="videoPreviewPlayButtonPlaying" class="btn btn-secondary" type="button" onclick="videoSocketSendPause()" style="display:none;">
+                      <button id="videoPreviewPlayButtonPlaying" class="btn btn-primary" type="button" onclick="videoSocketSendPause()" style="display:none;">
                         <i class="fas fa-pause"></i>
                       </button>
                       <input type="range" id="videoPreviewSeekbar" class="form-range" min="0" max="250" value="0">
@@ -69,17 +69,17 @@
             </div>
           </div>
 
-          <hr class="bg-light">
+          <hr class="bg-light my-0">
 
-          <div class="d-flex flex-nowrap">
-            <div class="d-flex align-items-center pe-2 text-light user-select-none">Oscarmusik:</div>
-            <audio class="w-100 me-2" controls id="audio_intromusik" src="/resource/base/oscarmusik.mp3"></audio>
-            <button type="button" class="btn btn-secondary" onclick="fadeoutAudio(document.getElementById('audio_intromusik'))">fadeout</button>
+          <div class="d-flex flex-nowrap my-4 gap-3">
+            <div class="d-flex align-items-center text-light user-select-none">Oscarmusik:</div>
+            <audio class="w-100" controls id="audio_intromusik" src="/resource/base/oscarmusik.mp3" preload="auto"></audio>
+            <button type="button" class="btn btn-secondary text-nowrap px-4 py-1" onclick="fadeoutAudio(document.getElementById('audio_intromusik'))">fade out</button>
           </div>
 
-          <hr class="bg-light">
+          <hr class="bg-light mt-0">
 
-          <h3 class="text-light">Medien</h3>
+          <h3 class="text-light fw-light">Medien</h3>
           <div class="d-flex flex-nowrap gap-4 pt-1 pb-2 text-light user-select-none">
             <div class="form-check text-nowrap" role="button">
               <input class="form-check-input" type="checkbox" value="" id="mediaTableFilterHideMedia" role="button">
@@ -93,6 +93,9 @@
               <input class="form-check-input" type="checkbox" value="" id="mediaTableFilterHideUnknown" role="button" checked>
               <label class="form-check-label" for="mediaTableFilterHideUnknown" role="button">Unbekannte verbergen</label>
             </div>
+            <button class="btn btn-secondary px-2 py-0 ms-auto" onclick="fetchMediaTable()">
+              <i class="fa fa-rotate-right"></i>
+            </button>
           </div>
           <div class="overflow-auto">
             <table class="mediaTable table table-hover">
@@ -113,5 +116,6 @@
 
   <script src="js/videoSocket.js"></script>
   <script src="js/mediaTable.js"></script>
+  <script src="js/teleprompt.js"></script>
   </body>
 </html>
