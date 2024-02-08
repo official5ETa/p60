@@ -71,12 +71,10 @@ navigator.mediaDevices
         $('#errorAlert')
           .html(`<code>${error}</code><br>could not start playback`)
           .show();
-        $(video).hide();
       });
   })
   .catch((error) => {
     $('#errorAlert')
       .html(`<code>${error}</code><br>access to the microphone is required`)
       .show();
-    $(video).hide();
   });
