@@ -61,14 +61,17 @@
                 </tr>
                 <tr>
                   <td colspan="3" class="pt-2">
-                    <div class="d-flex flex-nowrap align-items-center gap-3">
+                    <div class="d-flex flex-nowrap align-items-center">
                       <button id="videoPreviewPlayButtonPaused" class="btn btn-primary" type="button" onclick="videoSocketSendPlay()">
                         <i class="fas fa-play"></i>
                       </button>
                       <button id="videoPreviewPlayButtonPlaying" class="btn btn-primary" type="button" onclick="videoSocketSendPause()" style="display:none;">
                         <i class="fas fa-pause"></i>
                       </button>
-                      <input type="range" id="videoPreviewSeekbar" class="form-range" min="0" max="250" value="0">
+                      <input type="range" id="videoPreviewSeekbar" class="form-range mx-3" min="0" max="250" value="0">
+                      <button id="videoPreviewStopButton" class="btn btn-secondary" type="button" onclick="videoSocketSendStop()">
+                        <i class="fas fa-stop"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>

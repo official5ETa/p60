@@ -3,6 +3,7 @@ const _videoSocketReadyState = $('#videoSocketReadyState');
 const _videoPreviewPlayheadStatus = $('#videoPreviewPlayheadStatus');
 const _videoPreviewPlayButtonPaused = $('#videoPreviewPlayButtonPaused');
 const _videoPreviewPlayButtonPlaying = $('#videoPreviewPlayButtonPlaying');
+const _videoPreviewStopButton = $('#videoPreviewStopButton');
 const _videoPreviewSeekbar = $('#videoPreviewSeekbar');
 const _videoPreviewControlsEnabled = $('#videoPreviewControlsEnabled');
 const _mediaTableFilterHideMedia = $('#mediaTableFilterHideMedia');
@@ -14,11 +15,13 @@ const videoPreview = document.getElementById('videoPreview');
 
 let videoDisconnectedTimeout,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  videoConnected = false;
+  videoConnected = false,
+  videoPlaying = false;
 function resetVideoDisconnectedTimeout() {
   clearTimeout(videoDisconnectedTimeout);
   videoDisconnectedTimeout = setTimeout(() => {
     videoConnected = false;
+    videoPlaying = false;
     _videoPreviewConnectedStatus.html('<span class="text-danger">NO</span>');
   }, 4e3);
 }
@@ -39,6 +42,7 @@ function connectToVideoSocket() {
   videoSocket.on('status', (data) => {
     resetVideoDisconnectedTimeout();
     videoConnected = true;
+    videoPlaying = data.playing;
 
     if (videoPreview.src !== data.src) videoPreview.src = data.src;
     videoPreview.currentTime = data.currentTime;
@@ -87,10 +91,19 @@ function videoSocketSendSeekPerc(seekPerc) {
 
 function setVideoPreviewControlsEnabled() {
   const disabled =
-    _videoPreviewControlsEnabled.is(':checked') || !videoConnected;
+    !videoConnected || _videoPreviewControlsEnabled.is(':checked');
   _videoPreviewPlayButtonPaused.prop('disabled', disabled);
   _videoPreviewPlayButtonPlaying.prop('disabled', disabled);
   _videoPreviewSeekbar.prop('disabled', disabled);
+}
+
+function updateVideoPreviewStopButtonEnabled() {
+  _videoPreviewStopButton.prop(
+    'disabled',
+    !videoConnected ||
+      !videoPlaying ||
+      _videoPreviewControlsEnabled.is(':checked'),
+  );
 }
 
 _videoPreviewControlsEnabled.change(() => {
@@ -134,4 +147,5 @@ setInterval(() => {
       }
     })(),
   );
+  updateVideoPreviewStopButtonEnabled();
 }, 200);
