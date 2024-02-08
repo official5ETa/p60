@@ -9,7 +9,7 @@ export class MediaService {
     const dir = join(__dirname, '../../../public/resource/queue');
     return readdirSync(dir)
       .filter((file) => !file.startsWith('.'))
-      .map((file) => {
+      .map((file, index) => {
         const mimetype = lookup(file),
           type = mimetype.startsWith('video')
             ? 'video'
@@ -23,6 +23,7 @@ export class MediaService {
               ? readFileSync(join(dir, file)).toString().split('\n\n')
               : undefined;
         return {
+          id: index,
           src: encodeURI(join('/resource/queue', file)),
           name: file,
           type,
