@@ -4,10 +4,12 @@ function connectToVideoSocket() {
 
   videoSocket.on('connect', () => {
     console.log('Verbunden mit Socket.IO-Server');
+    toast('Socket', 'Verbunden mit Socket.IO-Server');
   });
 
   videoSocket.on('disconnect', () => {
     console.log('Verbindung zum Socket.IO-Server getrennt');
+    toast('Socket', 'Verbindung zum Socket.IO-Server getrennt');
     setTimeout(connectToVideoSocket, 200);
   });
 

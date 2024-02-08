@@ -7,7 +7,7 @@ import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({ namespace: 'socket/video' })
 export class VideoSocketGateway {
-  @WebSocketServer() server: Server;
+  @WebSocketServer() private server: Server;
 
   @SubscribeMessage('status')
   handleVideoStatus(client: Socket, data: object) {

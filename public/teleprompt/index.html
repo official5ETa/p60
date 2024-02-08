@@ -5,26 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>p60 Video Frame</title>
+    <title>p60 Teleprompt Frame</title>
     <script src="/lib/jquery/@3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/lib/bootstrap/@5.0.2/bootstrap.min.css">
     <script src="/lib/bootstrap/@5.0.2/bootstrap.bundle.min.js"></script>
     <script src="/lib/socket.io/@4.1.3/socket.io.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body class="bg-dark">
-
-    <div class="container p-3">
-      <div class="alert alert-danger" id="errorAlert" style="display:none;"></div>
-      <div class="alert alert-success" id="successAlert" style="display:none;"></div>
-      <div id="controls" style="display:none;">
-        <button class="btn btn-secondary" onclick="video.requestFullscreen()">fullscreen</button>
-      </div>
-    </div>
-
-    <div class="w-0 h-0 overflow-hidden">
-      <video id="video" preload="auto"></video>
-    </div>
+  <body class="bg-black overflow-hidden">
+    <div id="text" class="text-light"></div>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3 text-light user-select-none">
       <div id="liveToast" class="toast bg-secondary" role="alert" aria-live="assertive" aria-atomic="true">

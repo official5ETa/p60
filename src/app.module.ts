@@ -7,6 +7,7 @@ import { readdirSync } from 'fs';
 import { VideoSocketGateway } from './video-socket/video-socket.gateway';
 import { MediaController } from './api/media/media.controller';
 import { MediaService } from './api/media/media.service';
+import { TelepromptSocketGateway } from './teleprompt-socket/teleprompt-socket.gateway';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { MediaService } from './api/media/media.service';
     ),
   ],
   controllers: [AppController, MediaController],
-  providers: [AppService, VideoSocketGateway, MediaService],
+  providers: [AppService, VideoSocketGateway, MediaService, TelepromptSocketGateway],
 })
 export class AppModule {}
