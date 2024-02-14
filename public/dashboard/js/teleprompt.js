@@ -62,25 +62,58 @@ function setTelepromptControlsEnabled() {
   );
 }
 
+function _telepromptConvertText(text) {
+  const lnSplit = text.split('\n');
+  for (const i in lnSplit) {
+    const speakerSplit = lnSplit[i].split(':');
+    if (speakerSplit.length > 1) {
+      speakerSplit[0] = `\n<b style="color:#67c;">${speakerSplit[0]}</b>`;
+      lnSplit[i] = speakerSplit.join(':');
+    }
+  }
+  text = lnSplit.join('\n');
+
+  const bracketSplit = text.split('(');
+  if (bracketSplit.length > 1) {
+    for (let i = 1; i < bracketSplit.length; i++) {
+      const bracketCloseSplit = bracketSplit[i].split(')');
+      if (bracketCloseSplit.length > 1) {
+        bracketCloseSplit[0] =
+          '<i style="color:#fc8;">' + bracketCloseSplit[0] + '</i>';
+        bracketSplit[i] = bracketCloseSplit.join('');
+      }
+    }
+    text = bracketSplit.join('');
+  }
+
+  return text.trim().replaceAll('\n', '<br>');
+}
+
 function loadTelepromptIndex(index = telepromptIndex) {
   telepromptIndex = index;
   setTelepromptControlsEnabled();
   _telepromptIndex.val(telepromptIndex);
 
-  _telepromptTextPrev.text(
-    telepromptIndex < 2 || telepromptIndex === undefined
-      ? ''
-      : telepromptMedia.content[telepromptIndex - 2] || '',
+  _telepromptTextPrev.html(
+    _telepromptConvertText(
+      telepromptIndex < 2 || telepromptIndex === undefined
+        ? ''
+        : telepromptMedia.content[telepromptIndex - 2] || '',
+    ).replaceAll('\n\n', ''),
   );
-  _telepromptTextCurr.text(
-    telepromptIndex < 1 || telepromptIndex === undefined
-      ? ''
-      : telepromptMedia.content[telepromptIndex - 1] || '',
+  _telepromptTextCurr.html(
+    _telepromptConvertText(
+      telepromptIndex < 1 || telepromptIndex === undefined
+        ? ''
+        : telepromptMedia.content[telepromptIndex - 1] || '',
+    ).replaceAll('\n\n', ''),
   );
-  _telepromptTextNext.text(
-    telepromptIndex === undefined
-      ? ''
-      : telepromptMedia.content[telepromptIndex - 0] || '',
+  _telepromptTextNext.html(
+    _telepromptConvertText(
+      telepromptIndex === undefined
+        ? ''
+        : telepromptMedia.content[telepromptIndex - 0] || '',
+    ).replaceAll('\n\n', ''),
   );
 
   telepromptSocketSendText(

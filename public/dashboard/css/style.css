@@ -39,6 +39,7 @@ body::-webkit-scrollbar-thumb {
 #telepromptTextNext {
     border: 1px solid #424563;
     background-color: #282f37;
+    opacity: .9;
 }
 
 .telepromptTextNextTitle {
@@ -57,6 +58,7 @@ body::-webkit-scrollbar-thumb {
 #telepromptTextPrev {
     border: 1px solid #30324b;
     background-color: #232b33;
+    opacity: .65;
 }
 
 .telepromptTextPrevTitle {
@@ -65,6 +67,10 @@ body::-webkit-scrollbar-thumb {
 
 .telepromptText {
     height: 130px;
+}
+
+.telepromptTextCurrent {
+    height: 280px;
 }
 
 .telepromptTextHiddenOverlay {
