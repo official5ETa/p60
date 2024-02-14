@@ -36,11 +36,15 @@ function connectToTelepromptSocket() {
 }
 
 function _telepromptConvertText(text) {
-  const speakerSplit = text.split(':');
-  if (speakerSplit.length > 1) {
-    speakerSplit[0] = '<b style="color:#67c;">' + speakerSplit[0] + '</b>';
-    text = speakerSplit.join(':');
+  const lnSplit = text.split('\n');
+  for (const i in lnSplit) {
+    const speakerSplit = lnSplit[i].split(':');
+    if (speakerSplit.length > 1) {
+      speakerSplit[0] = `\n<b style="color:#67c;">${speakerSplit[0]}</b>`;
+      lnSplit[i] = speakerSplit.join(':');
+    }
   }
+  text = lnSplit.join('\n');
 
   const bracketSplit = text.split('(');
   if (bracketSplit.length > 1) {
@@ -55,7 +59,7 @@ function _telepromptConvertText(text) {
     text = bracketSplit.join('');
   }
 
-  return text.replaceAll('\n', '<br>');
+  return text.trim().replaceAll('\n', '<br>');
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
