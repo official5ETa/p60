@@ -67,12 +67,26 @@ function loadTelepromptIndex(index = telepromptIndex) {
   setTelepromptControlsEnabled();
   _telepromptIndex.val(telepromptIndex);
 
-  _telepromptTextPrev.text(telepromptMedia.content[telepromptIndex - 2] || '');
-  _telepromptTextCurr.text(telepromptMedia.content[telepromptIndex - 1] || '');
-  _telepromptTextNext.text(telepromptMedia.content[telepromptIndex - 0] || '');
+  _telepromptTextPrev.text(
+    telepromptIndex < 2 || telepromptIndex === undefined
+      ? ''
+      : telepromptMedia.content[telepromptIndex - 2] || '',
+  );
+  _telepromptTextCurr.text(
+    telepromptIndex < 1 || telepromptIndex === undefined
+      ? ''
+      : telepromptMedia.content[telepromptIndex - 1] || '',
+  );
+  _telepromptTextNext.text(
+    telepromptIndex === undefined
+      ? ''
+      : telepromptMedia.content[telepromptIndex - 0] || '',
+  );
 
   telepromptSocketSendText(
-    telepromptClear ? '' : telepromptMedia.content[telepromptIndex - 1] || '',
+    telepromptClear || telepromptIndex < 1 || telepromptIndex === undefined
+      ? ''
+      : telepromptMedia.content[telepromptIndex - 1] || '',
   );
 }
 
