@@ -2,11 +2,11 @@ body {
     overflow-y: scroll;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 12px;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: var(--bs-gray);
     border-radius: 3px;
 }

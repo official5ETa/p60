@@ -188,13 +188,13 @@
               <div class="d-flex flex-column gap-3">
                 <div>
                   <div class="small user-select-none telepromptTextNextTitle">next</div>
-                  <div class="telepromptText user-select-none rounded-3 p-3 text-muted" id="telepromptTextNext"></div>
+                  <div class="telepromptText user-select-none rounded-3 p-3 text-muted overflow-hidden" id="telepromptTextNext"></div>
                 </div>
                 <div>
                   <div class="small user-select-none telepromptTextCurrTitle">current</div>
                   <div class="telepromptText telepromptTextCurrent user-select-none position-relative">
-                    <div class="position-absolute w-100 h-100 rounded-3 p-3 text-light" id="telepromptTextCurr"></div>
-                    <div class="telepromptTextHiddenOverlay position-absolute w-100 h-100 rounded-3 d-flex justify-content-center align-items-center bg-warning text-black-50 fw-bolder h2"
+                    <div class="position-absolute w-100 h-100 rounded-3 p-3 text-light overflow-auto" id="telepromptTextCurr"></div>
+                    <div class="telepromptTextHiddenOverlay position-absolute w-100 h-100 rounded-3 d-flex justify-content-center align-items-center bg-warning text-black-50 fw-bolder h2 pe-none"
                          id="telepromptTextHidden"
                          style="opacity:0;"
                     >CLEAR</div>
@@ -202,7 +202,7 @@
                 </div>
                 <div>
                   <div class="small user-select-none telepromptTextPrevTitle">previous</div>
-                  <div class="telepromptText user-select-none rounded-3 p-3 text-muted fw-light" id="telepromptTextPrev"></div>
+                  <div class="telepromptText user-select-none rounded-3 p-3 text-muted fw-light overflow-hidden" id="telepromptTextPrev"></div>
                 </div>
               </div>
             </div>
