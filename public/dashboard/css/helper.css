@@ -1,0 +1,21 @@
+.h-0 {
+    height: 0 !important;
+}
+
+.bg-black {
+    background-color: #000 !important;
+}
+
+.fast .toggle-group {
+    transition: left .18s;
+    -webkit-transition: left .18s;
+}
+
+[data-toggle="toggle"] .toggle-group > label {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+[data-toggle="toggle"] .toggle-group .toggle-handle {
+    display: none;
+}

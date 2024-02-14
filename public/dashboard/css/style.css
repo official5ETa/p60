@@ -1,11 +1,3 @@
-.h-0 {
-    height: 0 !important;
-}
-
-.bg-black {
-    background-color: #000 !important;
-}
-
 .mediaTable .mediaTableTypeFrame {
     width: 100px;
     height: 50px;
@@ -25,4 +17,44 @@
 
 .mediaTable tr:has(td:hover) .mediaTableTypeFrame {
     color: var(--bs-primary);
+}
+
+#telepromptIndexMax {
+    min-width: 38px;
+}
+
+#telepromptTextNext {
+    border: 1px solid #424563;
+    background-color: #282f37;
+}
+
+.telepromptTextNextTitle {
+    color: #505271;
+}
+
+#telepromptTextCurr {
+    border: 1px solid #5b5d6f;
+    background-color: #313c47;
+}
+
+.telepromptTextCurrTitle {
+    color: #6e7293;
+}
+
+#telepromptTextPrev {
+    border: 1px solid #30324b;
+    background-color: #232b33;
+}
+
+.telepromptTextPrevTitle {
+    color: #393b55;
+}
+
+.telepromptText {
+    height: 130px;
+}
+
+.telepromptTextHiddenOverlay {
+    transition: opacity .18s;
+    opacity: .5;
 }

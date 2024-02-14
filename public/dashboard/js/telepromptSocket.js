@@ -33,9 +33,32 @@ function connectToTelepromptSocket() {
   });
 }
 
+function _telepromptConvertText(text) {
+  const speakerSplit = text.split(':');
+  if (speakerSplit.length > 1) {
+    speakerSplit[0] = '<b style="color:#67c;">' + speakerSplit[0] + '</b>';
+    text = speakerSplit.join(':');
+  }
+
+  const bracketSplit = text.split('(');
+  if (bracketSplit.length > 1) {
+    for (let i = 1; i < bracketSplit.length; i++) {
+      const bracketCloseSplit = bracketSplit[i].split(')');
+      if (bracketCloseSplit.length > 1) {
+        bracketCloseSplit[0] =
+          '<i style="color:#fc8;">' + bracketCloseSplit[0] + '</i>';
+        bracketSplit[i] = bracketCloseSplit.join('');
+      }
+    }
+    text = bracketSplit.join('');
+  }
+
+  return text.replaceAll('\n', '<br>');
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function telepromptSocketSendText(text) {
-  telepromptSocket.emit('text', { text });
+function telepromptSocketSendText(text = '') {
+  telepromptSocket.emit('text', { text: _telepromptConvertText(text) });
 }
 
 connectToTelepromptSocket();

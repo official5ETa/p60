@@ -16,7 +16,7 @@ function connectToTelepromptSocket() {
   });
 
   telepromptSocket.on('text', ({ text }) => {
-    _text.text(text);
+    _text.html(text);
   });
 }
 
