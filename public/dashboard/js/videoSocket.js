@@ -80,6 +80,11 @@ function videoSocketSendPause() {
   videoSocket.emit('pause');
 }
 
+function videoToggle() {
+  if (videoPlaying) videoSocketSendPause();
+  else videoSocketSendPlay();
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function videoSocketSendStop() {
   videoSocket.emit('stop');
@@ -131,6 +136,15 @@ _mediaTableFilterHideUnknown.change(() => {
 
 _mediaTableFilterHideChecked.change(() => {
   setMediaTableDOMWithFilter();
+});
+
+document.addEventListener('keydown', (event) => {
+  switch (event.key) {
+    case ' ':
+      videoToggle();
+      event.preventDefault();
+      break;
+  }
 });
 
 connectToVideoSocket();
