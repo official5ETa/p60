@@ -114,4 +114,21 @@ function telepromptClearToggleChange() {
 
 _telepromptClearToggle.change(telepromptClearToggleChange);
 
+document.addEventListener('keydown', (event) => {
+  switch (event.key) {
+    case 'ArrowUp':
+      telepromptPrev();
+      event.preventDefault();
+      break;
+    case 'ArrowDown':
+      telepromptNext();
+      event.preventDefault();
+      break;
+    case 'c':
+    case 'C':
+      _telepromptClearToggle.bootstrapToggle('toggle');
+      break;
+  }
+});
+
 loadTeleprompt();
