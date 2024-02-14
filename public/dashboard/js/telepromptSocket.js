@@ -29,6 +29,8 @@ function connectToTelepromptSocket() {
     resetTelepromptDisconnectedTimeout();
     telepromptConnected = true;
 
+    loadTelepromptIndex();
+
     _telepromptConnectedStatus.html('<span class="text-success">YES</span>');
   });
 }
