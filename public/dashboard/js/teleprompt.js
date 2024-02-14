@@ -9,7 +9,9 @@ const _telepromptTextHidden = $('#telepromptTextHidden');
 const _telepromptTextPrev = $('#telepromptTextPrev');
 const _telepromptClearToggle = $('#telepromptClearToggle');
 
-let telepromptMedia, telepromptIndex;
+let telepromptMedia,
+  telepromptIndex,
+  telepromptClear = false;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function loadTeleprompt(media) {
@@ -69,7 +71,9 @@ function loadTelepromptIndex(index = telepromptIndex) {
   _telepromptTextCurr.text(telepromptMedia.content[telepromptIndex - 1] || '');
   _telepromptTextNext.text(telepromptMedia.content[telepromptIndex - 0] || '');
 
-  telepromptSocketSendText(telepromptMedia.content[telepromptIndex - 1] || '');
+  telepromptSocketSendText(
+    telepromptClear ? '' : telepromptMedia.content[telepromptIndex - 1] || '',
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -89,13 +93,9 @@ function telepromptNext() {
 }
 
 function telepromptClearToggleChange() {
-  if (_telepromptClearToggle.is(':checked')) {
-    telepromptSocketSendText();
-    _telepromptTextHidden.css('opacity', '');
-  } else {
-    loadTelepromptIndex();
-    _telepromptTextHidden.css('opacity', 0);
-  }
+  telepromptClear = _telepromptClearToggle.is(':checked');
+  loadTelepromptIndex();
+  _telepromptTextHidden.css('opacity', telepromptClear ? '' : 0);
 }
 
 _telepromptClearToggle.change(telepromptClearToggleChange);
