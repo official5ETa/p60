@@ -1,4 +1,6 @@
 let mediaTable = [];
+let mediaWasPlayed = [];
+
 function fetchMediaTable() {
   $.ajax({
     type: 'GET',
@@ -42,18 +44,24 @@ function setMediaTableDOM(media = mediaTable) {
 
 function setMediaTableDOMWithFilter() {
   let media = mediaTable;
+
   if ($('#mediaTableFilterHideUnknown').is(':checked'))
     media = media.filter((media) => media.type !== 'unknown');
+
   if ($('#mediaTableFilterHideMedia').is(':checked'))
     media = media.filter(
       (media) => media.type !== 'video' && media.type !== 'audio',
     );
+
   if ($('#mediaTableFilterHideTeleprompt').is(':checked'))
     media = media.filter((media) => media.type !== 'teleprompt');
+
+  if ($('#mediaTableFilterHideChecked').is(':checked'))
+    media = media.filter((media) => !mediaWasPlayed.includes(media.id));
+
   setMediaTableDOM(media);
 }
 
-let mediaWasPlayed = [];
 function updateMediaWasPlayed() {
   for (const { id } of mediaTable)
     $(`#mediaTableMedia-${id} .mediaWasPlayed`).html(
@@ -66,6 +74,7 @@ function updateMediaWasPlayed() {
 function addToMediaWasPlayed(id) {
   mediaWasPlayed.push(id);
   updateMediaWasPlayed();
+  setMediaTableDOMWithFilter();
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

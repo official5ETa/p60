@@ -9,6 +9,7 @@ const _videoPreviewControlsEnabled = $('#videoPreviewControlsEnabled');
 const _mediaTableFilterHideMedia = $('#mediaTableFilterHideMedia');
 const _mediaTableFilterHideTeleprompt = $('#mediaTableFilterHideTeleprompt');
 const _mediaTableFilterHideUnknown = $('#mediaTableFilterHideUnknown');
+const _mediaTableFilterHideChecked = $('#mediaTableFilterHideChecked');
 
 /** @type {HTMLVideoElement} */
 const videoPreview = document.getElementById('videoPreview');
@@ -125,6 +126,10 @@ _mediaTableFilterHideTeleprompt.change(() => {
 });
 
 _mediaTableFilterHideUnknown.change(() => {
+  setMediaTableDOMWithFilter();
+});
+
+_mediaTableFilterHideChecked.change(() => {
   setMediaTableDOMWithFilter();
 });
 
