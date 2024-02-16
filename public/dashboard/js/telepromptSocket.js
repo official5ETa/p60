@@ -37,7 +37,9 @@ function connectToTelepromptSocket() {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function telepromptSocketSendText(text = '') {
-  telepromptSocket.emit('text', { text: _telepromptConvertText(text) });
+  telepromptSocket.emit('text', {
+    text: text ? _telepromptConvertText(text) : null,
+  });
 }
 
 connectToTelepromptSocket();

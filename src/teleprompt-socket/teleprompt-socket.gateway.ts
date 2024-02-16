@@ -15,7 +15,7 @@ export class TelepromptSocketGateway {
   }
 
   @SubscribeMessage('text')
-  handleTelepromptText(client: Socket, data: { text: string }) {
+  handleTelepromptText(client: Socket, data: { text: string | null }) {
     this.server.emit('text', data);
   }
 }
