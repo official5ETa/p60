@@ -1,3 +1,7 @@
 .bg-black {
     background-color: #000;
 }
+
+.telepromptText {
+    font-family: Helvetica, Arial, sans-serif;
+}

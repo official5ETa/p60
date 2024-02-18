@@ -66,6 +66,7 @@ body {
 }
 
 .telepromptText {
+    font-family: Helvetica, Arial, sans-serif;
     height: 130px;
 }
 
