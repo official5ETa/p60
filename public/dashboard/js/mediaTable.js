@@ -1,3 +1,7 @@
+const _mediaTableIndicCount = $('#mediaTableIndicCount');
+const _mediaTableIndicHidden = $('#mediaTableIndicHidden');
+const _mediaTableIndicWasPalayed = $('#mediaTableIndicWasPlayed');
+
 let mediaTable = [];
 let mediaWasPlayed = [];
 
@@ -39,6 +43,9 @@ function setMediaTableDOM(media = mediaTable) {
       `,
     ),
   );
+  _mediaTableIndicCount.text(mediaTable.length);
+  _mediaTableIndicHidden.text(mediaTable.length - media.length);
+  _mediaTableIndicWasPalayed.text(mediaWasPlayed.length);
   updateMediaWasPlayed();
 }
 
