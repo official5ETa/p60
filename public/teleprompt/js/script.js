@@ -16,9 +16,21 @@ function connectToTelepromptSocket() {
   });
 
   telepromptSocket.on('text', ({ text }) => {
-    if (text) _text.html(text);
-    else if (text === null) _text.text('');
+    setText(text);
   });
+}
+
+function setText(text = '') {
+  if (text) {
+    _text.html(text);
+    for (let i = 0; true; i++) {
+      _text.css('font-size', i);
+      if (_text.height() > window.innerHeight) {
+        _text.css('font-size', i - 1);
+        break;
+      }
+    }
+  } else if (text === null) _text.text('');
 }
 
 function initStatusInterval() {
