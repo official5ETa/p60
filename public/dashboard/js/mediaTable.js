@@ -79,7 +79,7 @@ function updateMediaWasPlayed() {
 }
 
 function addToMediaWasPlayed(id) {
-  mediaWasPlayed.push(id);
+  if (!mediaWasPlayed.includes(id)) mediaWasPlayed.push(id);
   updateMediaWasPlayed();
   setMediaTableDOMWithFilter();
 }
